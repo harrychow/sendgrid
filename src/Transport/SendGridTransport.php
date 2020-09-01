@@ -1,6 +1,6 @@
 <?php
 
-namespace SendGridDriver\Transport;
+namespace harrychow\Transport;
 
 use Illuminate\Mail\Transport\Transport;
 use Swift_Mime_SimpleMessage;

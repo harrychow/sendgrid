@@ -1,11 +1,11 @@
 <?php
 
-namespace SendGridDriver;
+namespace harrychow;
 
-//use sendgrid;
-use extensions\sendgrid\Transport\SendGridAddedTransportManager;
+use harrychow;
+use harrychow\Transport\SendGridAddedTransportManager;
 use Illuminate\Mail\MailServiceProvider;
-//use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class SendGridServiceProvider extends MailServiceProvider
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SendGridDriver\Transport;
+namespace harrychow\Transport;
 
 use Illuminate\Mail\TransportManager;
 
