@@ -13,16 +13,9 @@
  
 	"autoload": {
 		"psr-4": {
-			"SendGrid\\SendGridDriver\\": "src/"
+			"harrychow\\": "src/"
 		}
 	},
  
-	"extra": {
-		"laravel": {
-			"providers": [
-				"SendGrid\\SendGridDriver\\SendGridServiceProvider"
-			]
-		}
-	},
 	"minimum-stability": "dev"
 }
