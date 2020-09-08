@@ -1,13 +1,13 @@
 <?php
 
 
-namespace harrychow\Transport;
+namespace ti_sendgrid\Transport;
 
 use Illuminate\Mail\TransportManager;
 
 class SendGridAddedTransportManager extends TransportManager
 {
-    protected function createSendGridDriver(): SendGridTransport
+    protected function createSmtpDriver(): SendGridTransport
     {
         return new SendGridTransport;
     }

@@ -1,6 +1,6 @@
 {
-	"name": "harrychow/sendgrid",
-	"description": "Sendgrid Driver for laravel",
+	"name": "ti_sendgrid/sendgrid",
+	"description": "Sendgrid Driver for TastyIgniter",
 	"license": "MIT",
 	"authors": [
 		{
@@ -14,7 +14,7 @@
  
 	"autoload": {
 		"psr-4": {
-			"harrychow\\": "src/"
+			"ti_sendgrid\\": "src/"
 		}
 	},
  
