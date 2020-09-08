@@ -12,9 +12,7 @@ class SendGridTransport extends Transport
 
     public function __construct()
     {
-        //getenv('SENDGRID_API_KEY'));
-        //config('sendgrid.secret_key');
-        $this->apiKey = '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';
+        $this->apiKey = config('sendgrid.secret_key');
     }
 
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)

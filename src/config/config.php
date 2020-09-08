@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'secret_key' => env('MAILJET_SECRET_KEY')
+    'secret_key' => env('SENDGRID_API')
 ];
