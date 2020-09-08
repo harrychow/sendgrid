@@ -4,7 +4,7 @@ namespace ti_sendgrid;
 
 use ti_sendgrid;
 use ti_sendgrid\Transport\SendGridAddedTransportManager;
-use Igniter\Flame\Mail\Mailer;
+use ti_sendgrid\Mail\Mailer;
 use Illuminate\Mail\MailServiceProvider;
 
 use Illuminate\Support\ServiceProvider;
@@ -22,8 +22,6 @@ class SendGridServiceProvider extends MailServiceProvider
     protected function registerIlluminateMailer()
     {
         $this->app->singleton('mailer', function ($app) {
-
-//            $this->app['events']->fire('mailer.beforeRegister', [$this]);
 
             $config = $app->make('config')->get('mail');
 

@@ -7,12 +7,11 @@ use Swift_Mime_SimpleMessage;
 
 class SendGridTransport extends Transport
 {
-
     protected $apiKey;
 
     public function __construct()
     {
-        $this->apiKey = config('sendgrid.secret_key');
+        $this->apiKey = env('SENDGRID_API');
     }
 
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
@@ -21,16 +20,8 @@ class SendGridTransport extends Transport
         $email->setFrom("h.chow@reply.com", "Example User");
         $email->setSubject($message->getSubject());
         $email->addTos($message->getTo());
-        dd($message->getBody());
 
-        $email->addDynamicTemplateData("city1", "Denver");
-        $substitutions = [
-            "subject2" => "Example Subject 2",
-            "name2" => "Example Name 2",
-            "city2" => "Orange"
-        ];
-
-        $email->addDynamicTemplateDatas($substitutions);
+        $email->addDynamicTemplateDatas($message->rawData);
         $email->setTemplateId('d-34702e4cae004e7ba343ed23d4091fe5');
 
         try {

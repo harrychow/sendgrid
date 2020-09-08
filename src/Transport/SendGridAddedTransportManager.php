@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ti_sendgrid\Transport;
 
 use Illuminate\Mail\TransportManager;
