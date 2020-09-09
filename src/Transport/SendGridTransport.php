@@ -4,6 +4,8 @@ namespace ti_sendgrid\Transport;
 
 use Illuminate\Mail\Transport\Transport;
 use Swift_Mime_SimpleMessage;
+use Igniter\Flame\Setting\Facades\Setting;
+use System\Models\Mail_templates_model;
 
 class SendGridTransport extends Transport
 {
@@ -17,21 +19,29 @@ class SendGridTransport extends Transport
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
         $email = new \SendGrid\Mail\Mail();
-        $email->setFrom("h.chow@reply.com", "Example User");
+        $email->setFrom(Setting::get('sender_email'), Setting::get('sender_name'));
         $email->setSubject($message->getSubject());
         $email->addTos($message->getTo());
 
         $email->addDynamicTemplateDatas($message->rawData);
-        $email->setTemplateId('d-34702e4cae004e7ba343ed23d4091fe5');
+        $template = Mail_templates_model::where('code', $message->rawView)->first();
+
+        if ($template && $template->sendgrid_template_id) {
+            $email->setTemplateId($template->sendgrid_template_id);
+        } else {
+            throw new \Swift_TransportException('missing template id');
+        }
 
         try {
             $sendgrid = new \SendGrid($this->apiKey);
             $response = $sendgrid->send($email);
-            print $response->statusCode() . "\n";
-            print_r($response->headers());
-            print $response->body() . "\n";
+            if ($response->statusCode() != 202) {
+                throw new \Swift_TransportException($response->body());
+            } else {
+                return 1;
+            }
         } catch (Exception $e) {
-            dd('Caught exception: '. $e->getMessage() ."\n");
+            throw $e;
         }
     }
 

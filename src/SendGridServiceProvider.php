@@ -6,6 +6,7 @@ use ti_sendgrid;
 use ti_sendgrid\Transport\SendGridAddedTransportManager;
 use ti_sendgrid\Mail\Mailer;
 use Illuminate\Mail\MailServiceProvider;
+use Igniter\Flame\Setting\Facades\Setting;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -53,7 +54,7 @@ class SendGridServiceProvider extends MailServiceProvider
     protected function registerSwiftTransport()
     {
         // Switch here depending on what's selected in settings
-        if (true) {
+        if (Setting::get('protocol') == 'sendgrid') {
             $this->app->singleton('swift.transport', function ($app) {
                 return new SendGridAddedTransportManager($app);
             });
