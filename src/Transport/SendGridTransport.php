@@ -13,7 +13,12 @@ class SendGridTransport extends Transport
 
     public function __construct()
     {
-        $this->apiKey = env('SENDGRID_API');
+	$sendgridApi = Setting::get('sendgrid_api');
+	if (!$sendgridApi) {
+		$sendgridApi = (Setting::get('smtp_user') == 'apikey') ? Setting::get('smtp_pass'):null;
+	}
+
+	$this->apiKey = $sendgridApi;
     }
 
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
